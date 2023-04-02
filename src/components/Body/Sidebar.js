@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
 const toggleInfo = useSelector(Store => Store.toggle.isMenuOpen)
@@ -7,16 +8,19 @@ if(!toggleInfo){
   return null;
 }
   return (
-    <div className=" mr-4 ml-2 shadow-lg w-1/6  h-screen ">
-      <ul className=" border-b-2 border-gray-200">
+    <div className=" mr-4 ml-2 shadow-lg h-screen ">
+      <ul className="w-52 border-b-2 border-gray-200">
+          <Link to="/">
         <li className="p-2  hover:bg-gray-100 flex items-center rounded-lg">
+
           <img
             alt="profile"
             src="https://i.pinimg.com/originals/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
-            className="w-8 mr-4 "
+            className="w-8 cursor-pointer mr-4 "
           ></img>
           Home
         </li>
+          </Link>
         <li className="p-2 hover:bg-gray-100 flex items-center rounded-lg">
           <img
             alt="profile"
