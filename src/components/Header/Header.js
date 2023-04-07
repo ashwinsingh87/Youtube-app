@@ -1,22 +1,31 @@
-import React, { useState } from "react";
-// import SearchBar from "./SearchBar";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { toggleIt } from "../../utils/sideToggle";
 import { Link } from "react-router-dom";
+import { SEARCH_API } from "../../utils/Helper";
 
 const Header = () => {
-  const [searchItem, setSearchItem] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const [searchedList, setSearchedList] = useState("");
+  const [showFocus, setShowFocus] = useState(false);
 
-  function handleChange(value) {
-    setSearchItem(value);
-    console.log(searchItem);
-  }
+  const callSearching = async () => {
+    const data = await fetch(SEARCH_API + searchText);
+    const json = await data.json();
+    setSearchedList(json[1]);
+    console.log(json[1]);
+  };
+  useEffect(() => {
+    callSearching();
+  }, [searchText]);
+
   const dispatch = useDispatch();
   function handleOnClick() {
     dispatch(toggleIt());
   }
   return (
-    <div className=" grid grid-flow-col  h-14   ">
+    <div className=" grid grid-flow-col">
+      {/* burger menu and youtube logo */}
       <div className=" col-span-1 flex items-center justify-center">
         <img
           alt="button"
@@ -34,30 +43,37 @@ const Header = () => {
           ></img>
         </Link>
       </div>
-      <div className="col-span-10  flex items-center justify-center">
-        
-            <input
-              type="text"
-              onChange={(e) => handleChange(e.target.value)}
-              className="w-1/2 rounded-l-full pl-4 border-2 text-base  border-gray-200 border-r-0 p-2 "
-              placeholder="Search"
-            ></input>
-            <button  className="  bg-gray-50 border-gray-300 border rounded-r-full">
-             <img alt="" src="https://www.clipartmax.com/png/middle/279-2795130_search-magnifying-glass-search-icon-transparent.png"  className="w-7 p-1 mt-2 mb-2  ml-3 mr-3"></img>
-            </button>
-            <div>
-              {searchItem.length > 0 ? (
-                <div className="w-8 h-60 bg-slate-500">hello</div>
-              ) : null}
-            </div>
-          <img
-            alt="search-mic"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQasxNP_W1mTVyXC5tCJ4ya0vh1iRkHUsZK1NnBJLbq&s"
-            className="w-3 h-5 cursor-pointer ml-4"
-          ></img>
+
+      {/* Search bar */}
+      <div className="col-span-10 mt-1 px-10 flex flex-col items-center ">
+        <div className="w-3/6 flex ">
+          <input
+            type="text"
+            onChange={(e) => setSearchText(e.target.value)}
+            className="w-full rounded-l-full p-2 border border-gray-200 "
+            placeholder="Search"
+            value={searchText}
+            onFocus={() => setShowFocus(true)}
+            onBlur={() => setShowFocus(false)}
+          ></input>
+          <button className="  bg-gray-50 px-2 py-2 border-gray-300 border rounded-r-full">
+            Search
+          </button>
+        </div>
+        {/*seachedList */}
+        {showFocus && (
+          <div className="fixed bg-gray-100 mt-11 shadow-lg w-2/6 rounded-xl py-2">
+            <ul>
+              {searchedList.length !== 0 &&
+                searchedList.map((e) => (
+                  <li className="px-4 py-2 border-b-2 hover:bg-gray-200">🔍 {e}</li>
+                ))}
+            </ul>
           </div>
-       
-      
+        )}
+      </div>
+
+      {/* Right nav bars */}
       <div className="col-span-1 flex items-center justify-center">
         <img
           alt="video-logo"
