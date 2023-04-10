@@ -3,6 +3,7 @@ import RecommendedVideo from "./RecommendedVideo";
 import { useDispatch } from "react-redux";
 import { closeMenu } from "../../utils/sideToggle";
 import {useSearchParams} from "react-router-dom"
+import Comments from "./Comments";
 
 const VideoPage = () => {
   const [searchParams] = useSearchParams();
@@ -25,24 +26,7 @@ const VideoPage = () => {
         ></iframe>
         <h2>Title</h2>
         <h1>Channel logo & Name</h1>
-        <div>
-          <h1>comments</h1>
-          <h1>comments</h1>
-          <h1>comments</h1>
-          <h1>comments</h1>
-          <h1>comments</h1>
-          <h1>comments</h1>
-          <h1>comments</h1>
-          <h1>comments</h1>
-          <h1>comments</h1>
-          <h1>comments</h1>
-          <h1>comments</h1>
-          <h1>comments</h1>
-          <h1>comments</h1>
-          <h1>comments</h1>
-          <h1>comments</h1>
-          <h1>comments</h1>
-        </div>
+        <Comments/>
       </div>
       <div className="ml-6">
         <div className=" rounded-2xl w-96 h-96 border border-gray-300">

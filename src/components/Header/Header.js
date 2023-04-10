@@ -1,25 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleIt } from "../../utils/sideToggle";
 import { Link } from "react-router-dom";
 import { SEARCH_API } from "../../utils/Helper";
+import { cacheResults } from "../../utils/cacheSlice";
+import SearchResult from "../SearchResult/SearchResult";
 
 const Header = () => {
   const [searchText, setSearchText] = useState("");
   const [searchedList, setSearchedList] = useState("");
   const [showFocus, setShowFocus] = useState(false);
 
+  const dispatch = useDispatch();
+  const cacheInfo = useSelector((store) => store.Cache);
+  // console.log(cacheInfo);
+
   const callSearching = async () => {
     const data = await fetch(SEARCH_API + searchText);
     const json = await data.json();
     setSearchedList(json[1]);
-    console.log(json[1]);
+    dispatch(
+      cacheResults({
+        [searchText]: json[1],
+      })
+    );
+    // console.log(json[1]);
   };
   useEffect(() => {
-    callSearching();
+    const timer = setTimeout(() => {
+      if (cacheInfo[searchText]) {
+        setSearchedList(cacheInfo[searchText]);
+      } else {
+        console.log("Api calling for " + searchText);
+        callSearching();
+      }
+    }, 200);
+    return () => {
+      clearTimeout(timer);
+    };
   }, [searchText]);
 
-  const dispatch = useDispatch();
   function handleOnClick() {
     dispatch(toggleIt());
   }
@@ -66,7 +86,12 @@ const Header = () => {
             <ul>
               {searchedList.length !== 0 &&
                 searchedList.map((e) => (
-                  <li className="px-4 py-2 border-b-2 hover:bg-gray-200">🔍 {e}</li>
+                  <li
+                    key={e}
+                    className="px-4 py-2 border-b-2 cursor-pointer hover:bg-gray-200"
+                  >
+                    🔍 {e}
+                  </li>
                 ))}
             </ul>
           </div>
