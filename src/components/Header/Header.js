@@ -4,7 +4,6 @@ import { toggleIt } from "../../utils/sideToggle";
 import { Link } from "react-router-dom";
 import { SEARCH_API } from "../../utils/Helper";
 import { cacheResults } from "../../utils/cacheSlice";
-import SearchResult from "../SearchResult/SearchResult";
 
 const Header = () => {
   const [searchText, setSearchText] = useState("");
@@ -13,7 +12,6 @@ const Header = () => {
 
   const dispatch = useDispatch();
   const cacheInfo = useSelector((store) => store.Cache);
-  // console.log(cacheInfo);
 
   const callSearching = async () => {
     const data = await fetch(SEARCH_API + searchText);
@@ -24,14 +22,12 @@ const Header = () => {
         [searchText]: json[1],
       })
     );
-    // console.log(json[1]);
   };
   useEffect(() => {
     const timer = setTimeout(() => {
       if (cacheInfo[searchText]) {
         setSearchedList(cacheInfo[searchText]);
       } else {
-        console.log("Api calling for " + searchText);
         callSearching();
       }
     }, 200);
