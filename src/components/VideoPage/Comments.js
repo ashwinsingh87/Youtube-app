@@ -1,5 +1,5 @@
 import React from "react";
-
+import Face3Icon from '@mui/icons-material/Face3';
 const CommentData = [
   {
     Name: "Ashwin Singh",
@@ -87,13 +87,9 @@ const CommentData = [
 
 const Comment = ({ info }) => {
   const { Name, Message } = info;
-    return (
+  return (
     <div className="flex m-2 p-2 bg-gray-100 rounded-xl">
-      <img
-        alt="pfp"
-        className=" w-10 h-10"
-        src="https://i.pinimg.com/originals/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
-      ></img>
+      <Face3Icon className="mr-2" />
       <div>
         <h1>{Name}</h1>
         <p>{Message}</p>
@@ -105,7 +101,6 @@ const Comment = ({ info }) => {
 const CommentList = ({ commentInfo }) => {
   return commentInfo?.map((com, index) => (
     <div>
-      {" "}
       <Comment key={index} info={com} />
       <div className="ml-10">
         <CommentList key={index} commentInfo={com.replies} />
@@ -115,7 +110,10 @@ const CommentList = ({ commentInfo }) => {
 };
 
 const Comments = () => {
-  return <CommentList commentInfo={CommentData} />;
+  return <>
+    <h1 className="text-xl border-t-2 border-gray-400 pt-2 mt-2">Comments</h1>
+    <CommentList key={CommentData.length} commentInfo={CommentData} />
+  </>
 };
 
 export default Comments;

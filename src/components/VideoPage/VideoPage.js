@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
-// import RecommendedVideo from "./RecommendedVideo";
+import RecommendedVideo from "./RecommendedVideo";
 import { useDispatch } from "react-redux";
 import { closeMenu } from "../../utils/sideToggle";
 import { useSearchParams } from "react-router-dom";
 import Comments from "./Comments";
 import LiveChat from "./LiveChat";
 import { addMessage } from "../../utils/chatSlice";
-
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
+import ShareIcon from '@mui/icons-material/Share';
+import ContentCutIcon from '@mui/icons-material/ContentCut';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import ThumbDownAltOutlinedIcon from '@mui/icons-material/ThumbDownAltOutlined';
+import SupervisedUserCircleRoundedIcon from '@mui/icons-material/SupervisedUserCircleRounded';
 const VideoPage = () => {
   const [searchParams] = useSearchParams();
   const [message, setMessage] = useState("");
@@ -28,8 +34,9 @@ const VideoPage = () => {
     dispatch(closeMenu());
   }, []);
   return (
-    <div className="flex ml-10 mr-8 mt-2">
-      <div className="">
+    <div className="flex p-4 w-full justify-center overflow-hidden ">
+      <div className="pl-3">
+
         <iframe
           width="850"
           height="500"
@@ -39,20 +46,51 @@ const VideoPage = () => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
         ></iframe>
-        <h2>Title</h2>
-        <h1>Channel logo & Name</h1>
+        <h2 className="text-xl  mt-4 pl-2">Video Title</h2>
+        {/* Title and subscription */}
+        <div className="w-full flex items-center justify-between">
+          <div className="flex items-center">
+            <SupervisedUserCircleRoundedIcon className="text-cyan-800 mr-2 scale-110"/>
+            <h1 className="text-lg">Channel Name</h1>
+            <button className=" bg-red-600 border rounded-full flex justify-center m-1 p-1 ">
+              <NotificationsIcon className="text-gray-100 mr-1 ml-1" />
+              <span className="mr-2 text-white font-bold">Subscribe</span>
+            </button>
+          </div>
+          {/* like and dislike buttons */}
+          <div className="flex item-center justify-center">
+            <button className=" border-gray-500 border rounded-full flex item-center justify-center mr-2 p-1 ">
+              <ThumbUpAltOutlinedIcon className="text-gray-800 hover: mr-1 " />
+              <span className="mr-2 text-gray-800  font-light"> 77k | </span> 
+              <ThumbDownAltOutlinedIcon className="text-gray-800  mr-1 " />
+            </button>
+            <button className=" p-1 border border-gray-500 rounded-full flex item-center justify-center  mr-2">
+              <ShareIcon className="text-gray-800 mr-1 " />
+              <span className="mr-2 text-gray-800  font-light">Share</span>
+            </button> 
+             <button className="p-1 mr-2 border-gray-500 border rounded-full flex item-center justify-center">
+              <ContentCutIcon className="text-gray-800 mr-1 " />
+              <span className="mr-2 text-gray-800  font-light  ">Clip</span>
+
+               </button>
+            <button className=" mr-2 p-1 border-gray-500 border rounded-full flex item-center justify-center">
+              <MoreHorizIcon className="text-gray-800  mr-1 " />
+            </button>
+
+          </div>
+        </div>
         <Comments />
       </div>
       <div className="ml-6">
-        <h2 className="pl-5 pt-4 h-14 text-slate-800 text-lg border rounded-2xl border-gray-300 ">
+        <div className="pl-4 pt-4 w-96 h-14  text-slate-800 text-xl border rounded-2xl border-gray-300 ">
           Top chats
-        </h2>
+        </div>
         <div className=" rounded-2xl w-96 h-96 border overflow-y-scroll flex flex-col-reverse  border-gray-300">
           <LiveChat />
         </div>
         <div className="pl-5 py-2 h-14 text-slate-800 text-lg border rounded-2xl border-gray-300 w-96 ">
           <input
-            className="pl-2 h-full"
+            className="pl-2 border border-gray-400 rounded-lg"
             value={message}
             onKeyPress={(e) => {
               if (e.key === "Enter") {
@@ -64,13 +102,12 @@ const VideoPage = () => {
           <button
             type="submit"
             onClick={HandleSend}
-            className="bg-gray-100 border rounded-md ml-2 p-1"
-          >
+            className="bg-gray-100 border rounded-md ml-2 p-1">
             Send
           </button>
         </div>
         <h2 className="m-4 text-lg">Recommended videos</h2>
-        {/* <RecommendedVideo/> */}
+        <RecommendedVideo />
       </div>
     </div>
   );

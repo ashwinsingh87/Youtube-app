@@ -1,60 +1,32 @@
 import React, { useEffect, useState } from "react";
 import VideoContainers from "./VideoContainers";
-import { YOUTUBE_API_KEY } from "../../utils/Helper";
+import { YOUTUBE_API_KEY, categories } from "../../utils/Helper";
 import { useDispatch } from "react-redux";
 import { showMenu } from "../../utils/sideToggle";
 
 const MainContainer = () => {
-    const [video, setVideo] = useState([]);
-const dispatch= useDispatch();
-useEffect(() => {
-  callAPI();
-  dispatch(showMenu());
-}, []);
-async function callAPI() {
-  const data = await fetch(YOUTUBE_API_KEY);
-  const json = await data.json();
-  setVideo(json.items);
-}
-  return (
+  const [video, setVideo] = useState([]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    callAPI();
+    dispatch(showMenu());
+  }, []);
+  async function callAPI() {
+    const data = await fetch(YOUTUBE_API_KEY);
+    const json = await data.json();
+    setVideo(json.items);
+  }
+  return (  
     <div>
-      <div className=" h-screen pl-2">
-        <div className="mb-4">
-          <button className="border rounded-lg p-1 bg-gray-200 m-2">
-            Sports
-          </button>
-          <button className="border rounded-lg p-1 bg-gray-200 m-2">
-            Coding
-          </button>
-          <button className="border rounded-lg p-1 bg-gray-200 m-2">
-            Hockey
-          </button>
-          <button className="border rounded-lg p-1 bg-gray-200 m-2">
-            Cricket
-          </button>
-          <button className="border rounded-lg p-1 bg-gray-200 m-2">
-            Games
-          </button>
-          <button className="border rounded-lg p-1 bg-gray-200 m-2">
-            Action
-          </button>
-          <button className="border rounded-lg p-1 bg-gray-200 m-2">
-            Football
-          </button>
-          <button className="border rounded-lg p-1 bg-gray-200 m-2">
-            Photography
-          </button>
-          <button className="border rounded-lg p-1 bg-gray-200 m-2">
-            Movie
-          </button>
-          <button className="border rounded-lg p-1 bg-gray-200 m-2">
-            Games
-          </button>
-          <button className="border rounded-lg p-1 bg-gray-200 m-2">
-            Action
-          </button>
+      <div className=" z-10">
+        <div className="mb-2 sm:w-[350px] overflow-x-scroll ml-6 flex ">
+          {categories.map(cat =>
+            <span className=" border sm:ml-1 ml-2 rounded-lg p-1 hover:scale-x-110 bg-gray-200 hover:bg-red-700 hover:text-gray-200 sm:m-1 m-2">
+              {cat}
+            </span>
+          )}
         </div>
-        <div className="flex flex-wrap ">
+        <div className="flex sm:flex-col flex-wrap justify-center ">
           {video?.map((vid) => (
             <VideoContainers key={vid.id} info={vid} />
           ))}

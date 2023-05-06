@@ -1,92 +1,60 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { mainOptions } from "../../utils/Helper";
+import HomeIcon from '@mui/icons-material/Home';
+import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
+import WebStoriesIcon from '@mui/icons-material/WebStories';
 
 const Sidebar = () => {
-const toggleInfo = useSelector(Store => Store.toggle.isMenuOpen)
-if(!toggleInfo){
-  return null;
-}
-  return (
-    <div className=" mr-4 ml-2 shadow-lg h-screen ">
-      <ul className="w-52 border-b-2 border-gray-200">
-          <Link to="/">
-        <li className="p-2  hover:bg-gray-100 flex items-center rounded-lg">
+  const toggleInfo = useSelector(Store => Store.toggle.isMenuOpen)
+  if (!toggleInfo) {
+    return null;  
+  }
 
-          <img
-            alt="profile"
-            src="https://i.pinimg.com/originals/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
-            className="w-8 cursor-pointer mr-4 "
-          ></img>
-          Home
-        </li>
-          </Link>
-        <li className="p-2 hover:bg-gray-100 flex items-center rounded-lg">
-          <img
-            alt="profile"
-            src="https://i.pinimg.com/originals/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
-            className="w-8 mr-4 "
-          ></img>
-          Sports
-        </li>
-        <li className="p-2 hover:bg-gray-100 flex items-center rounded-lg">
-          <img
-            alt="profile"
-            src="https://i.pinimg.com/originals/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
-            className="w-8  mr-4"
-          ></img>
-          Movie
-        </li>
-        <li className="p-2 hover:bg-gray-100 flex items-center rounded-lg">
-          <img
-            alt="profile"
-            src="https://i.pinimg.com/originals/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
-            className="w-8  mr-4"
-          ></img>
-          Cars
-        </li>
-        <li className="p-2 hover:bg-gray-100 flex items-center rounded-lg">
-          <img
-            alt="profile"
-            src="https://i.pinimg.com/originals/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
-            className="w-8  mr-4"
-          ></img>
-          Football
-        </li>
-        <li className="p-2 hover:bg-gray-100 flex items-center rounded-lg">
-          <img
-            alt="profile"
-            src="https://i.pinimg.com/originals/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
-            className="w-8  mr-4"
-          ></img>
-          Shooting
-        </li>
+  return (
+    <div className="ml-2 w-52 sm:hidden shadow-2xl h-fit mb-4 z-50 ">
+      <ul className="w-52 border-b-2 sm:w-40 lg:w-40 border-gray-200 z-50 ">
+        <Link to="/">
+          <li className="p-2 hover:shadow-xl ease-in  sm:w-40 duration-100  hover:bg-sky-400 flex items-center rounded-lg z-50 hover:scale-105">
+            <HomeIcon className="cursor-pointer mr-4 scale-125 z-50" />
+            <span className="font-medium text-gray-700">
+            Home
+            </span>
+          </li>
+        </Link>
+        {mainOptions.map((item, index) =>
+          <li className="p-2 sm:w-40 hover:scale-105 ease-in duration-100 cursor-pointer bg-gradient-to-r hover:from-sky-200 hover:via-sky-300 hover:to-sky-400 flex items-center  rounded-lg z-50">
+            <WebStoriesIcon  className="ml-2 scale-75 mr-4 "/>
+            <span className="font-medium text-gray-700">
+            {item.title}
+            </span>
+          </li>)}
       </ul>
-      <ul className="p-4 ">
-        Subscriptions
-        <li className="p-2 mt-2 hover:bg-gray-100 rounded-lg flex items-center">
-          <img
-            alt="profile"
-            src="https://i.pinimg.com/originals/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
-            className="w-8  mr-4"
-          ></img>
-          Home
+      <ul className="sm:mb-2">
+        <div className=  "mt-2 sm:w-40 hover:scale-105 p-2 w-full rounded-lg cursor-pointer hover:bg-sky-300">
+      <SubscriptionsIcon  className="w-8 mr-4 "/>
+        <span className="font-medium text-gray-700">
+        Subscriptions 
+            </span>
+        </div>
+        <li className=" hover:scale-105 sm:w-40 p-2 z-50 cursor-pointer bg-gradient-to-r hover:from-sky-200 hover:via-sky-300 hover:to-sky-400 rounded-lg flex items-center">
+        <WebStoriesIcon  className="ml-2 scale-75 mr-4 "/>
+            <span className="font-medium text-gray-700">
+            Home 
+            </span>
         </li>
-        <li className="p-2 hover:bg-gray-100 rounded-lg flex items-center">
-          <img
-            alt="profile"
-            src="https://i.pinimg.com/originals/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
-            className="w-8  mr-4"
-          ></img>
-          Sports
+        <li className="p-2 hover:scale-105 sm:w-40 pl-2 cursor-pointer bg-gradient-to-r hover:from-sky-200 hover:via-sky-300 hover:to-sky-400 rounded-lg flex items-center">
+        <WebStoriesIcon  className="ml-2 scale-75 mr-4 "/>
+            <span className="font-medium text-gray-700">
+            Sports 
+            </span>
         </li>
-        <li className="p-2 hover:bg-gray-100 rounded-lg flex items-center">
-          <img
-            alt="profile"
-            src="https://i.pinimg.com/originals/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
-            className="w-8  mr-4"
-          ></img>
-          Movie
+        <li className="p-2 hover:scale-105 sm:w-40  pl-2 cursor-pointer bg-gradient-to-r hover:from-sky-200 hover:via-sky-300 hover:to-sky-400 rounded-lg flex items-center">
+        <WebStoriesIcon  className="ml-2 scale-75 mr-4 "/>
+            <span className="font-medium text-gray-700">
+            Movie 
+            </span>
         </li>
       </ul>
     </div>

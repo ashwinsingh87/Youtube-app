@@ -4,7 +4,11 @@ import { toggleIt } from "../../utils/sideToggle";
 import { Link } from "react-router-dom";
 import { SEARCH_API } from "../../utils/Helper";
 import { cacheResults } from "../../utils/cacheSlice";
-
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import NotificationsNoneSharpIcon from '@mui/icons-material/NotificationsNoneSharp';
+import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
 const Header = () => {
   const [searchText, setSearchText] = useState("");
   const [searchedList, setSearchedList] = useState("");
@@ -40,53 +44,53 @@ const Header = () => {
     dispatch(toggleIt());
   }
   return (
-    <div className=" grid grid-flow-col">
+    <div className="lg:mr-0 lg:ml-0  lg:rounded-sm bg-gradient-to-r from-sky-100 via-red-100 to-sky-100 duration-700 hover:from-red-200 hover:to-sky-300  grid grid-flow-col shadow-lg ml-4 mb-4 mr-4 rounded-lg">
       {/* burger menu and youtube logo */}
-      <div className=" col-span-1 flex items-center justify-center">
-        <img
-          alt="button"
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAXVBMVEX///8AAABtbW2UlJROTk6Ojo5JSUmgoKD8/PzT09OIiIiYmJidnZ3BwcFzc3O1tbUODg4yMjIcHBxUVFQiIiKlpaXW1tbHx8fm5ua7u7uvr6+BgYFZWVn09PRqamolSUV7AAABZ0lEQVR4nO3c7U7bQBCG0WwMOKmxA6VOIHzc/2VCWiTa/sbzStY5d/DI8a4jjWazAQAAAAAAAAAAAAAAAP6274duSUO/j/aN921592MucC7ou+hTgWNRYGtPocKKn+gfP3eRwH1ZYGuZV7EvLPwRKRwKCx8ihbeFhdtI4amwMHNf7O7qCh8jhZtzWWDmoPnwXBT4kgqs+myLPcGL1/P0cLWoaQ69gwAAAAAAAAD/2Y3DtF3SNIyZia9Ph4pxjLtDLrAr6Lu4TgU+FQW2ds4E7n6VFbb1T19mRmgrpy+fI4Xrn76sfIZTpLDyPZwjhZVnaWjyq+4+HDKBdd80b6nAou/SdpsLLPhvse0Or8lAAAAAAAAAgC/HubteUjcfo32nkt2Xp1zg6ndf1i1sS20wXf3uy2NZoN2XS1n/9KXdl9/J7suF2H35bTLnzG81F0Z69+XVzaK2vd2XAAAAAAAAAAAAAAAA8I93D28fr0e8asYAAAAASUVORK5CYII="
-          className="w-9 cursor-pointer h-7 "
+      <div className=" col-span-1 md:col-span-11 flex items-center justify-center ">
+        <div className="sm:hidden">
+          
+          <MenuIcon className=" cursor-pointer text-slate-800 hover:scale-x-125 "
           onClick={() => {
             handleOnClick();
-          }}
-        ></img>
+          }} />
+          </div>
         <Link to="/">
           <img
             alt="logo"
             src="https://logos-world.net/wp-content/uploads/2020/04/YouTube-Logo.png"
-            className="w-28 pl-4 "
+            className="w-28 pl-4 md:scale-125 "
           ></img>
         </Link>
       </div>
 
       {/* Search bar */}
-      <div className="col-span-10 mt-1 px-10 flex flex-col items-center ">
+      <div className="col-span-10 mt-1 px-10 flex flex-col items-center md:invisible">
         <div className="w-3/6 flex ">
           <input
             type="text"
             onChange={(e) => setSearchText(e.target.value)}
-            className="w-full rounded-l-full p-2 border border-gray-200 "
+            className="w-full hover:border-blue-400 hover:border-2 rounded-l-full p-2 pl-4 border border-gray-200 "
             placeholder="Search"
             value={searchText}
             onFocus={() => setShowFocus(true)}
             onBlur={() => setShowFocus(false)}
           ></input>
-          <button className="  bg-gray-50 px-2 py-2 border-gray-300 border rounded-r-full">
-            Search
+          <button className="hover:bg-gray-200  bg-gray-50 px-2 py-2 border-gray-300 border rounded-r-full flex">
+            <SearchIcon />
           </button>
         </div>
         {/*seachedList */}
-        {showFocus && (
+        {showFocus && searchText.length>0 && (
           <div className="fixed bg-gray-100 mt-11 shadow-lg w-2/6 rounded-xl py-2">
             <ul>
               {searchedList.length !== 0 &&
-                searchedList.map((e) => (
+                searchedList.map((val) => (
                   <li
-                    key={e}
+                    key={val}
+                    // onClick={setSearchText(val)}
                     className="px-4 py-2 border-b-2 cursor-pointer hover:bg-gray-200"
                   >
-                    🔍 {e}
+                    <SearchIcon /> {val}
                   </li>
                 ))}
             </ul>
@@ -95,22 +99,13 @@ const Header = () => {
       </div>
 
       {/* Right nav bars */}
-      <div className="col-span-1 flex items-center justify-center">
-        <img
-          alt="video-logo"
-          src="https://cdn0.iconfinder.com/data/icons/photo-and-video-3/24/116-512.png"
-          className="w-6 cursor-pointer h-6"
-        ></img>
-        <img
-          alt="bell-icon"
-          src="https://static.vecteezy.com/system/resources/thumbnails/010/366/166/small/bell-icon-transparent-notification-free-png.png"
-          className="w-9 cursor-pointer h-9 mr-1 ml-4"
-        ></img>
-        <img
-          alt="profile"
-          src="https://i.pinimg.com/originals/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
-          className="w-12 cursor-pointer mr-2 "
-        ></img>
+      <div className="col-span-1 flex items-center  justify-center">
+        <VideocamOutlinedIcon className="text-gray-600 hover:text-gray-800 scale-125 cursor-pointer mr-4 duration-500 hover:scale-125 " />
+
+        <NotificationsNoneSharpIcon className="text-gray-600 hover:text-gray-800 scale-110 cursor-pointer mr-4 duration-500 hover:scale-125" />
+
+        <AccountCircleIcon className="text-red-600 hover:text-red-900 scale-125 cursor-pointer mr-2 duration-500 hover:scale-125" />
+
       </div>
     </div>
   );
