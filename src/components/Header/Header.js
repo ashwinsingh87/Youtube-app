@@ -44,9 +44,9 @@ const Header = () => {
     dispatch(toggleIt());
   }
   return (
-    <div className="lg:mr-0 lg:ml-0  lg:rounded-sm bg-gradient-to-r from-sky-100 via-red-100 to-sky-100 duration-700 hover:from-red-200 hover:to-sky-300  grid grid-flow-col shadow-lg ml-4 mb-4 mr-4 rounded-lg">
+    <div className="lg:mr-0 md:mr-0 md:ml-0 sm:rounded-none md:justify-between lg:ml-0  lg:rounded-sm bg-gradient-to-r from-sky-100 via-red-100 to-sky-100 duration-700 hover:from-red-200 hover:to-sky-300  grid grid-flow-col shadow-lg ml-4 mb-4 mr-4 rounded-lg">
       {/* burger menu and youtube logo */}
-      <div className=" col-span-1 md:col-span-11 flex items-center justify-center ">
+      <div className=" col-span-1  flex items-center justify-center ">
         <div className="sm:hidden">
           
           <MenuIcon className=" cursor-pointer text-slate-800 hover:scale-x-125 "
@@ -64,7 +64,7 @@ const Header = () => {
       </div>
 
       {/* Search bar */}
-      <div className="col-span-10 mt-1 px-10 flex flex-col items-center md:invisible">
+      <div className="col-span-10 mt-1 px-10 flex flex-col items-center md:hidden">
         <div className="w-3/6 flex ">
           <input
             type="text"

@@ -34,11 +34,12 @@ const VideoPage = () => {
     dispatch(closeMenu());
   }, []);
   return (
-    <div className="flex p-4 w-full justify-center overflow-hidden ">
+    <div className="flex z-auto p-4 w-full justify-center overflow-hidden ">
       <div className="pl-3">
 
         <iframe
           width="850"
+          className="xl:w-[650px] xl:h-[400px]"
           height="500"
           src={"https://www.youtube.com/embed/" + searchParams.get("v")}
           title="YouTube video player"
@@ -81,16 +82,17 @@ const VideoPage = () => {
         </div>
         <Comments />
       </div>
+
       <div className="ml-6">
-        <div className="pl-4 pt-4 w-96 h-14  text-slate-800 text-xl border rounded-2xl border-gray-300 ">
+        <div className="pl-4 pt-4 w-96 h-14 xl:w-[350px] text-slate-800 text-xl border rounded-2xl border-gray-300 ">
           Top chats
         </div>
-        <div className=" rounded-2xl w-96 h-96 border overflow-y-scroll flex flex-col-reverse  border-gray-300">
+        <div className=" rounded-2xl xl:w-[350px] w-96 h-96 border overflow-y-scroll flex flex-col-reverse  border-gray-300">
           <LiveChat />
         </div>
-        <div className="pl-5 py-2 h-14 text-slate-800 text-lg border rounded-2xl border-gray-300 w-96 ">
+        <div className="pl-5 py-2 xl:w-[350px] h-14 text-slate-800 text-lg border rounded-2xl border-gray-300 w-96 ">
           <input
-            className="pl-2 border border-gray-400 rounded-lg"
+            className="pl-2 border xl:w-[250px] border-gray-400 rounded-lg"
             value={message}
             onKeyPress={(e) => {
               if (e.key === "Enter") {
@@ -102,7 +104,7 @@ const VideoPage = () => {
           <button
             type="submit"
             onClick={HandleSend}
-            className="bg-gray-100 border rounded-md ml-2 p-1">
+            className="bg-gray-100 border xl:p-0 rounded-md ml-2 p-1">
             Send
           </button>
         </div>

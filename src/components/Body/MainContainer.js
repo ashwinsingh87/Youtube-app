@@ -18,15 +18,15 @@ const MainContainer = () => {
   }
   return (  
     <div>
-      <div className=" z-10">
-        <div className="mb-2 sm:w-[350px] overflow-x-scroll ml-6 flex ">
+      <div className=" z-10 sm:w-screen overflow-hidden">
+        <div className="mb-2 lg:overflow-x-scroll md:w-96 md:overflow-x-scroll sm:ml-0 lg:w-96 sm:w-full  sm:overflow-x-scroll ml-6 flex ">
           {categories.map(cat =>
             <span className=" border sm:ml-1 ml-2 rounded-lg p-1 hover:scale-x-110 bg-gray-200 hover:bg-red-700 hover:text-gray-200 sm:m-1 m-2">
               {cat}
             </span>
           )}
         </div>
-        <div className="flex sm:flex-col flex-wrap justify-center ">
+        <div className="flex flex-wrap items-center justify-center ">
           {video?.map((vid) => (
             <VideoContainers key={vid.id} info={vid} />
           ))}
