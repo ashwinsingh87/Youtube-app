@@ -44,7 +44,7 @@ const Header = () => {
     dispatch(toggleIt());
   }
   return (
-    <div className="lg:mr-0 md:mr-0 md:ml-0 sm:rounded-none md:justify-between lg:ml-0  lg:rounded-sm bg-gradient-to-r from-sky-100 via-red-100 to-sky-100 duration-700 hover:from-red-200 hover:to-sky-300  grid grid-flow-col shadow-lg ml-4 mb-4 mr-4 rounded-lg">
+    <div className="lg:mr-0 sm:h-10 md:mr-0 sm:justify-between sm:flex sm:ml-0 sm:mr-0 md:ml-0 sm:rounded-none md:justify-between lg:ml-0  lg:rounded-sm bg-gradient-to-r from-sky-100 via-red-100 to-sky-100 duration-700 hover:from-red-200 hover:to-sky-300  grid grid-flow-col shadow-lg ml-4 mb-4 sm:mb-2 mr-4 rounded-lg">
       {/* burger menu and youtube logo */}
       <div className=" col-span-1  flex items-center justify-center ">
         <div className="sm:hidden">
@@ -64,7 +64,7 @@ const Header = () => {
       </div>
 
       {/* Search bar */}
-      <div className="col-span-10 mt-1 px-10 flex flex-col items-center md:hidden">
+      <div className="col-span-10 mt-1 sm:hidden  px-10 flex flex-col items-center md:hidden">
         <div className="w-3/6 flex ">
           <input
             type="text"
@@ -100,11 +100,11 @@ const Header = () => {
 
       {/* Right nav bars */}
       <div className="col-span-1 flex items-center  justify-center">
-        <VideocamOutlinedIcon className="text-gray-600 hover:text-gray-800 scale-125 cursor-pointer mr-4 duration-500 hover:scale-125 " />
+        <VideocamOutlinedIcon className="text-gray-600 hover:text-gray-800 sm:scale-100 scale-125 cursor-pointer mr-4 sm:mr-2 duration-500 hover:scale-125 " />
 
-        <NotificationsNoneSharpIcon className="text-gray-600 hover:text-gray-800 scale-110 cursor-pointer mr-4 duration-500 hover:scale-125" />
+        <NotificationsNoneSharpIcon className="text-gray-600 sm:mr-2 sm:scale-100 hover:text-gray-800 scale-110 cursor-pointer mr-4 duration-500 hover:scale-125" />
 
-        <AccountCircleIcon className="text-red-600 hover:text-red-900 scale-125 cursor-pointer mr-2 duration-500 hover:scale-125" />
+        <AccountCircleIcon className="text-red-600 sm:scale-100 sm:mr-2 hover:text-red-900 scale-125 cursor-pointer mr-2 duration-500 hover:scale-125" />
 
       </div>
     </div>

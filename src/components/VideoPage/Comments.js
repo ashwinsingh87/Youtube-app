@@ -88,11 +88,11 @@ const CommentData = [
 const Comment = ({ info }) => {
   const { Name, Message } = info;
   return (
-    <div className="flex m-2 p-2 bg-gray-100 rounded-xl">
-      <Face3Icon className="mr-2" />
+    <div className="flex sm:m-1 sm:p-1 m-2 p-2 bg-gray-100 rounded-xl">
+      <Face3Icon className="mr-2 " />
       <div>
-        <h1>{Name}</h1>
-        <p>{Message}</p>
+        <h1 className="sm:text-sm">{Name}</h1>
+        <p className="sm:text-sm">{Message}</p>
       </div>
     </div>
   );
@@ -102,7 +102,7 @@ const CommentList = ({ commentInfo }) => {
   return commentInfo?.map((com, index) => (
     <div>
       <Comment key={index} info={com} />
-      <div className="ml-10">
+      <div className="ml-10 md:hidden sm:hidden">
         <CommentList key={index} commentInfo={com.replies} />
       </div>
     </div>
@@ -111,7 +111,7 @@ const CommentList = ({ commentInfo }) => {
 
 const Comments = () => {
   return <>
-    <h1 className="text-xl border-t-2 border-gray-400 pt-2 mt-2">Comments</h1>
+    <h1 className="text-xl border-t-2 border-gray-400 sm:font-medium sm:text-base pt-2 mt-2">Comments</h1>
     <CommentList key={CommentData.length} commentInfo={CommentData} />
   </>
 };
